@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="CoBo">
+<head>
+  <title>CoBo</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+  <script type="text/javascript" src="./app/app.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://bootswatch.com/superhero/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="styles/styles.css">
+</head>
+<body>
+
+
+  <h1>Welcome to the CoBo</h1>
+
+  <hr style="border-color:white">
+
+  <div ng-controller="searchController">
+    <h4>Search top-rated recipes</h4>
+    <p>Simply enter a kind of food or ingredient, and we'll find the best recipe for you</p>
+
+    <form ng-submit="searchRecipe(userSearch)">
+      <input id="userSearch" type="text" ng-model="userSearch" placeholder="Find a recipe" />
+      <div style="position:relative; top:20px">
+        <button class="btn btn-success">Search</button>
+      </div>
+    </form>
+    <h1>{{userSearch}}</h1>
+
+
+    <!-- Search results -->
+    <div ng-controller="resultsController" class="results">
+      <span class="recipeEntry col-md-3" ng-repeat="recipe in recipeList" ng-model="recipeEntry">
+        <img id="recipeImage" src="{{recipe.image_url}}" />
+        <h5 id="recipeTitle"><a id="recipeUrl" href="{{recipe.source_url}}">{{ recipe.title }}</a></h5>
+
+      </span>
+    </div>
+  </div>
+
+
+</body>
+</html>

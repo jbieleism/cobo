@@ -1,0 +1,20 @@
+{
+  "name": "cobo",
+  "version": "1.0.0",
+  "description": "This app will display a list of the top ten recipes based on a food ingredient input from the user",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server/server.js"
+  },
+  "author": "Justin Biele",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "bower": "^1.7.9",
+    "express": "^4.14.0",
+    "morgan": "^1.7.0",
+    "nodemon": "^1.11.0",
+    "request": "^2.75.0"
+  }
+}

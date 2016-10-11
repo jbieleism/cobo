@@ -1,0 +1,42 @@
+*{
+  margin:0 auto;
+  text-align:center;
+  border-right:50px;
+  border-left:50px;
+}
+
+#userSearch{
+  width:300px;
+}
+
+.results{
+  margin:0 auto;
+  text-align:center;
+}
+
+.recipeEntry{
+  padding-top:10px;
+  background-color: beige;
+  width:25%;
+  height:200px;
+  color:black;
+  margin:20px;
+}
+
+.recipeEntry:hover{
+  transition:.5s;
+  background-color:powderblue;
+}
+
+#recipeImage{
+  height:150px;
+  width:175px;
+}
+
+#recipeUrl:hover{
+  transition:1s;
+  color:dodgerblue;
+}
+.spaceBetween{
+  height:100px;
+}
