@@ -9,6 +9,10 @@ app.controller('searchController', function($scope, searchFactory){
       .then(function(response){
         console.log(response)
         $scope.recipeList = response.data.recipes;
+        //rounds the social ranking
+        $scope.recipeList.forEach(function(recipe){
+          recipe["social_rank"] = Math.floor(recipe["social_rank"])
+        })
       })
       .catch(function(err){
         console.log("Error: ", err)
@@ -30,24 +34,6 @@ app.factory("searchFactory", function($http){
   }
 })
 
-
-
-
-
-
-//this controller and factory should produce a new page with a specified recipe entry with its ingredients and directions
-//controller of results
-app.controller('resultsController', function($scope, $location, recipeViewFactory){
-  $scope.recipeView = function(){
-    recipeViewFactory.recipeView($scope.recipeEntry)
-      .then(function(response){
-        console.log("got to the response!")
-      })
-      .catch(function(err){
-        console.log("You got an Error: ", err)
-      })
-  }
-})
 
 app.factory("recipeViewFactory", function($http){
   var recipeView = function(params){

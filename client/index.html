@@ -21,7 +21,7 @@
     <form ng-submit="searchRecipe(userSearch)">
       <input id="userSearch" type="text" ng-model="userSearch" placeholder="Find a recipe" />
       <div style="position:relative; top:20px">
-        <button class="btn btn-success">Search</button>
+        <button id="search-button" class="btn btn-success">Search</button>
       </div>
     </form>
     <h1>{{userSearch}}</h1>
@@ -30,12 +30,13 @@
     <!-- Search results -->
 
 
-    <div class="results" >
-      <div class="recipeEntry col-md-5" ng-repeat="recipe in recipeList">
+    <div class="results">
+      <div class="recipeEntry col-md-2" ng-repeat="recipe in recipeList" ng-model="recipeEntry">
         <img id="recipeImage" src="{{recipe.image_url}}" />
         <!-- href should go to recipe source url -->
-        <h5 id="recipeTitle"><a id="recipeUrl" ng-submit="" href="">{{recipe.title}}</a></h5>
-
+        <h5 id="recipeTitle"><a id="recipeUrl" ng-submit="recipeView()" href="{{recipe.source_url}}">{{recipe.title}}</a>
+          <p>Rating: %{{recipe.social_rank}}</p>
+        </h5>
       </div>
     </div>
   </div>

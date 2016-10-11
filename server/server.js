@@ -38,22 +38,30 @@ app.use('/getRecipes', function(req, res){
       throw new Error(error);
     }
     else {
+      console.log("this is the body", body)
       res.send(body)
     }
   });
 })
 
 
-app.use('/signin', function(req, res){
-
-  console.log("this is the query yo ", req.query)
-
-})
-
-
-
 app.use('/viewRecipe', function(req, res){
-  console.log(req.query)
+
+  var options = {
+    method: 'GET',
+    url: 'http://food2fork.com/api/get',
+    params:{
+      key: 'b8a91d7a8b2020d0224112bc10aca703',
+      rId: recipe_id
+    }
+  };
+  request(options, function(error, response, body){
+    if (error){
+      throw new Error(error)
+    } else {
+      res.send(body)
+    }
+  })
 })
 
 
