@@ -46,13 +46,13 @@ app.use('/getRecipes', function(req, res){
 
 
 app.use('/viewRecipe', function(req, res){
-
+  console.log("this is the req.query :", req.query)
   var options = {
     method: 'GET',
     url: 'http://food2fork.com/api/get',
-    params:{
+    qs:{
       key: 'b8a91d7a8b2020d0224112bc10aca703',
-      rId: recipe_id
+      rId: req.query.id
     }
   };
   request(options, function(error, response, body){

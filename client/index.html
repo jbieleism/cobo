@@ -4,6 +4,7 @@
   <title>CoBo</title>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
   <script type="text/javascript" src="./app/app.js"></script>
+
   <link rel="stylesheet" type="text/css" href="https://bootswatch.com/superhero/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="styles/styles.css">
 </head>
@@ -31,16 +32,62 @@
 
 
     <div class="results">
-      <div class="recipeEntry col-md-2" ng-repeat="recipe in recipeList" ng-model="recipeEntry">
-        <img id="recipeImage" src="{{recipe.image_url}}" />
-        <!-- href should go to recipe source url -->
-        <h5 id="recipeTitle"><a id="recipeUrl" ng-submit="recipeView()" href="{{recipe.source_url}}">{{recipe.title}}</a>
-          <p>Rating: %{{recipe.social_rank}}</p>
-        </h5>
+      <div class="recipeEntry" ng-repeat="recipe in recipeList" ng-model="recipeEntry">
+        <div id="{{recipe.recipe_id}}" ng-click="flag = !flag">
+
+            <img id="recipeImage" src="{{recipe.image_url}}" />
+            <!-- href should go to recipe source url -->
+            <h5 id="recipeTitle"><a id="recipeUrl" ng-click="recipeView(recipe.recipe_id)">{{recipe.title}}</a>
+              <p>Rating: %{{recipe.social_rank}}</p>
+            </h5>
+          <ul ng-show='!flag'>
+            <p ng-repeat="ingredient in currentRecipe.ingredients">
+              {{ingredient}}
+            </p>
+          </ul>
+          <p><a href="{{recipe.source_url}}">Directions</a></p>
+        </div>
       </div>
     </div>
+
+
+    <!-- Single Recipe Modal -->
+<!--     <div ng-show='flag'>
+      'Hello'
+    </div> -->
+
+
+<!--     <div ng-show="flag" class="modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title"></h4>
+          </div>
+          <div class="modal-body">
+            <img src="{{}}">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+
+
+
+
+
+
+
   </div>
 
+
+<script   src="http://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 </body>
 </html>
