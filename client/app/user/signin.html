@@ -1,15 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="CoBo">
 <head>
   <title>CoBo</title>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
-  <script type="text/javascript" src="./app/app.js"></script>
+  <script type="text/javascript" src="../app/app.js"></script>
   <link rel="stylesheet" type="text/css" href="https://bootswatch.com/superhero/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="../styles/styles.css">
+  <link rel="stylesheet" type="text/css" href="signin.css">
 </head>
 <body>
 
-<h1>Hello</h1>
+
+<div class="container">
+<form class="form-horizontal">
+  <fieldset>
+    <legend>Sign In</legend>
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Ussername</label>
+      <div class="col-lg-8">
+        <input type="text" class="form-control" id="inputEmail" placeholder="Username">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+      <div class="col-lg-8">
+        <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-lg-8 col-lg-offset-2">
+        <button type="reset" class="btn btn-default">Cancel</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+</div>
+
+
+
+
+
+
+
+
+
+
 
 </body>
 </html>

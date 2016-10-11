@@ -28,12 +28,15 @@
 
 
     <!-- Search results -->
-    <div ng-controller="resultsController" class="results">
-      <span class="recipeEntry col-md-3" ng-repeat="recipe in recipeList" ng-model="recipeEntry">
-        <img id="recipeImage" src="{{recipe.image_url}}" />
-        <h5 id="recipeTitle"><a id="recipeUrl" href="{{recipe.source_url}}">{{ recipe.title }}</a></h5>
 
-      </span>
+
+    <div class="results" >
+      <div class="recipeEntry col-md-5" ng-repeat="recipe in recipeList">
+        <img id="recipeImage" src="{{recipe.image_url}}" />
+        <!-- href should go to recipe source url -->
+        <h5 id="recipeTitle"><a id="recipeUrl" ng-submit="" href="">{{recipe.title}}</a></h5>
+
+      </div>
     </div>
   </div>
 
