@@ -41,7 +41,7 @@
             <img id="recipeImage" src="{{recipe.image_url}}" />
             <!-- href should go to recipe source url -->
             <h5 id="recipeTitle"><a ng-click="recipeView(recipe.recipe_id)">{{recipe.title}}</a>
-              <p>Rating: %{{recipe.social_rank}}</p>
+              <p>Rating: {{recipe.social_rank}}%</p>
             </h5>
           <ul ng-show='!flag'>
             <p ng-repeat="ingredient in currentRecipe.ingredients">
