@@ -45,3 +45,15 @@
 .spaceBetween{
   height:100px;
 }
+
+
+#cred-inputs{
+  text-align:center;
+  margin:0 auto;
+}
+#usernameInput{
+  width:300px;
+}
+#passwordInput{
+  width:300px;
+}

@@ -12,6 +12,10 @@
 
 
   <h1>Welcome to the CoBo</h1>
+    <!-- Button trigger modal -->
+  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#userModal">
+    Login/SignUp
+  </button>
 
   <hr style="border-color:white">
 
@@ -37,7 +41,7 @@
 
             <img id="recipeImage" src="{{recipe.image_url}}" />
             <!-- href should go to recipe source url -->
-            <h5 id="recipeTitle"><a id="recipeUrl" ng-click="recipeView(recipe.recipe_id)">{{recipe.title}}</a>
+            <h5 id="recipeTitle"><a ng-click="recipeView(recipe.recipe_id)">{{recipe.title}}</a>
               <p>Rating: %{{recipe.social_rank}}</p>
             </h5>
           <ul ng-show='!flag'>
@@ -50,32 +54,28 @@
       </div>
     </div>
 
-
-    <!-- Single Recipe Modal -->
-<!--     <div ng-show='flag'>
-      'Hello'
-    </div> -->
-
-
-<!--     <div ng-show="flag" class="modal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title"></h4>
-          </div>
-          <div class="modal-body">
-            <img src="{{}}">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
+<!-- Modal -->
+<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">User Info</h4>
       </div>
-    </div> -->
-
-
+      <div class="modal-body">
+        <form id="cred-inputs">
+          <input type="text" id="usernameInput" placeholder="username">
+          <hr style="border-color:white">
+          <input type="password" id="passwordInput" placeholder="password" >
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success">Login</button>
+        <button type="button" class="btn btn-info">Sign Up</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
