@@ -4,14 +4,14 @@ var http = require('http');
 var bodyParser = require('body-parser');
 var request = require('request');
 
-var port = 8000;
+var port = process.env.PORT || 8000;
 
 
 var app = express();
 
 app.use(bodyParser.json())
 app.use(logger('dev'))
-app.use(express.static('/Users/justin/desktop/mvp/client'));
+app.use(express.static('./client'));
 
 
 //allows for cross-origin requests

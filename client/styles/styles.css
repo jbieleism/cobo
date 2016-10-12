@@ -30,7 +30,8 @@
 
 .recipeEntry:hover{
   transition:.5s;
-  background-color:powderblue;
+  background-color:#3e596d;
+  border:white;
 }
 
 #recipeImage{
@@ -46,6 +47,9 @@
   height:100px;
 }
 
+#search-button{
+  margin-bottom:10px;
+}
 
 #cred-inputs{
   text-align:center;
