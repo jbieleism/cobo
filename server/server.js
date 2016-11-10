@@ -35,7 +35,7 @@ app.use('/getRecipes', function(req, res){
   };
   request(options, function (error, response, body) {
     if (error){
-      throw new Error(error);
+      console.log(error);
     }
     else {
       console.log("this is the body", body)

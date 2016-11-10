@@ -9,7 +9,7 @@
   <link rel="stylesheet" type="text/css" href="styles/styles.css">
 </head>
 <body>
-
+<div class="container">
 
   <h1>Welcome to the CoBo</h1>
     <!-- Button trigger modal -->
@@ -35,7 +35,7 @@
 
 
     <div class="results">
-      <div class="recipeEntry" ng-repeat="recipe in recipeList" ng-model="recipeEntry">
+      <div class="recipeEntry col-md-4" ng-repeat="recipe in recipeList" ng-model="recipeEntry">
         <div id="{{recipe.recipe_id}}" ng-click="flag = !flag">
 
             <img id="recipeImage" src="{{recipe.image_url}}" />
@@ -83,10 +83,151 @@
 
   </div>
 
-
+</div>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+var express = require('express');
+var logger = require('morgan');
+var http = require('http');
+var bodyParser = require('body-parser');
+var request = require('request');
+
+var port = process.env.PORT || 8000;
+
+
+var app = express();
+
+app.use(bodyParser.json())
+app.use(logger('dev'))
+app.use(express.static('./client'));
+
+//allows for cross-origin requests
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+////
+
+app.use('/getRecipes', function(req, res){
+  console.log("this is the query yo", req.query)
+  var options = {
+    method: 'GET',
+    url: 'http://food2fork.com/api/search',
+    qs: {
+      key: 'b8a91d7a8b2020d0224112bc10aca703',
+      q: req.query.q
+    }
+  };
+  request(options, function (error, response, body) {
+    if (error){
+      throw new Error(error);
+    }
+    else {
+      console.log("this is the body", body)
+      res.send(body)
+    }
+  });
+})
+app.use('/viewRecipe', function(req, res){
+  console.log("this is the req.query :", req.query)
+  var options = {
+    method: 'GET',
+    url: 'http://food2fork.com/api/get',
+    qs:{
+      key: 'b8a91d7a8b2020d0224112bc10aca703',
+      rId: req.query.id
+    }
+  };
+  request(options, function(error, response, body){
+    if (error){
+      throw new Error(error)
+    } else {
+      res.send(body)
+    }
+  })
+})
+app.listen(port, function(){
+  console.log('Listening on port: ', port)
+});
+</script>
+<script type="text/javascript">
+  var app = angular.module('CoBo', []);
+
+//this controller and factory send and recieve requests for a list of recipe entries
+//search bar controller
+app.controller('searchController', function($scope, searchFactory, recipeViewFactory){
+  $scope.flag = true;
+  $scope.currentRecipe = {};
+  var recipeList = $scope.recipeList;
+  $scope.searchRecipe = function(){
+    console.log($scope.userSearch)
+    searchFactory.searchRecipe($scope.userSearch)
+      .then(function(response){
+        console.log(response)
+        $scope.recipeList = response.data.recipes;
+        //rounds the social ranking
+        $scope.recipeList.forEach(function(recipe){
+          recipe["social_rank"] = Math.floor(recipe["social_rank"])
+        })
+      })
+      .catch(function(err){
+        console.log("Error: ", err)
+      })
+  }
+  $scope.recipeView = function(id){
+    $scope.flag = true;
+    console.log("suh bruh", id)
+    recipeViewFactory.recipeView(id)
+      .then(function(response){
+
+        $scope.currentRecipe = response.data.recipe;
+        console.log($scope.currentRecipe.ingredients)
+      })
+      .catch(function(err){
+        console.log('You have made a grave error: ', err)
+      })
+      console.log($scope.flag)
+  }
+})
+
+app.factory("searchFactory", function($http){
+  var searchRecipe = function(params){
+    return $http({
+      method: 'GET',
+      url: 'http://localhost:8000/getRecipes',
+      params: {
+        q: params
+      }
+    })
+  }
+  return {
+    searchRecipe: searchRecipe
+  }
+})
+
+app.factory("recipeViewFactory", function($http){
+  var recipeView = function(params){
+
+    console.log("some params yo:", params)
+    return $http({
+      method: 'GET',
+      url: 'http://localhost:8000/viewRecipe',
+      params: {
+        id: params
+      }
+    })
+  }
+  return {
+    recipeView: recipeView
+  }
+})
+/////////////////////////////////////////////////////
+</script>
+
 
 </body>
 </html>

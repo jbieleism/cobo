@@ -14,3 +14,12 @@ var UserSchema = new mongoose.Schema({
     type: String
   }
 })
+
+
+
+
+var UserModel = new Schema('UserModel', UserSchema)
+
+module.exports = {
+  UserModel: UserModel
+}
